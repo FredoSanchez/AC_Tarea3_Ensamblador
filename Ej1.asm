@@ -191,5 +191,5 @@ msg1	db	"En escriba un parrafo corto y presione Enter"
 len	equ	$-msg1
 err	db	"La cantidad caracteres debe ser entre 50 y 70"
 len2	equ	$-err
-msg2	db	"validinuar con el proceso? (S/n)"
+msg2	db	"Continuar con el proceso? (S/n)"
 len3	equ	$-msg2

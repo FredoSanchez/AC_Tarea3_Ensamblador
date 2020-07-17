@@ -4,8 +4,7 @@ section .text
 
 	call 	grafico	
 
-;f(0) = 1
-	xor 	si, si
+	xor 	si, si;Elemento 1
 	xor 	di, di
 
 	mov 	si, 95d 	; X -> Columna
@@ -15,7 +14,7 @@ section .text
 	mov	al, 0Dh
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '1'
 	mov	[320h], al
@@ -25,10 +24,9 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 0Dh
 	mov	[323h], al
-	call	char
+	call	numero
 
-	;f(1) = 1
-	xor 	si, si
+	xor 	si, si;Elemento 2
 	xor 	di, di
 
 	mov 	si, 125d 	; X -> Columna
@@ -38,7 +36,7 @@ section .text
 	mov	al, 03h
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '1'
 	mov	[320h], al
@@ -48,10 +46,10 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 03h
 	mov	[323h], al
-	call	char
+	call	numero
 
-	;f(2) = 2
-	xor 	si, si
+
+	xor 	si, si;Elemento 3
 	xor 	di, di
 
 	mov 	si, 95d 	; X -> Columna
@@ -61,7 +59,7 @@ section .text
 	mov	al, 06h
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '2'
 	mov	[320h], al
@@ -71,10 +69,9 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 06h
 	mov	[323h], al
-	call	char
+	call	numero
 
-	;f(3) = 3
-	xor 	si, si
+	xor 	si, si;Elemento 4
 	xor 	di, di
 
 	mov 	si, 5d 	; X -> Columna
@@ -84,7 +81,7 @@ section .text
 	mov	al, 09h
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '3'
 	mov	[320h], al
@@ -94,10 +91,10 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 09h
 	mov	[323h], al
-	call	char
+	call	numero
 
-	;f(4) = 5
-	xor 	si, si
+
+	xor 	si, si;Elemento 5
 	xor 	di, di
 
 	mov 	si, 5d 	; X -> Columna
@@ -107,7 +104,7 @@ section .text
 	mov	al, 01h
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '5'
 	mov	[320h], al
@@ -117,10 +114,10 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 01h
 	mov	[323h], al
-	call	char
+	call	numero
 
-	;f(5) = 8
-	xor 	si, si
+
+	xor 	si, si ;Elemento 6
 	xor 	di, di
 
 	mov 	si, 155d 	; X -> Columna
@@ -130,7 +127,7 @@ section .text
 	mov	al, 02h
 	mov	[320h], al	; Color
 	
-	call 	cuadro
+	call 	dibujo
 
 	mov	al, '8'
 	mov	[320h], al
@@ -140,7 +137,7 @@ section .text
 	mov	[322h], al ;Columna
 	mov	al, 02h
 	mov	[323h], al
-	call	char
+	call	numero
 
 	call 	kb
 	int 	20h
@@ -157,9 +154,9 @@ grafico:mov	ah, 00h
 	ret
 
 ;Este segmento dibuja un cuadro iniciando en (si, di) con L = [300h]
-cuadro:	mov	bx, 0000h	;Limites de si (BH) y di (BL)
+dibujo:	mov	bx, 0000h	;Limites de si (BH) y di (BL)
 	mov	[310h], si
-hor:	mov 	cx, 0d 		; Columna 
+dibujo2:	mov 	cx, 0d 		; Columna 
 	add 	cx, si
 	mov	dx, di 		; Fila
 	mov	[330h], bx
@@ -168,7 +165,7 @@ hor:	mov 	cx, 0d 		; Columna
 	inc 	si
 	inc 	bh
 	cmp 	bh, [300h]
-	jne 	hor
+	jne 	dibujo2
 	
 	inc	di
 	inc	bl
@@ -176,12 +173,12 @@ hor:	mov 	cx, 0d 		; Columna
 	je	end
 	mov	si, [310h]
 	mov	bh, 00h
-	jmp	hor
+	jmp	dibujo2
 
 end:	ret
 
 	;Escribir el caracter guardado en [320h] en la fila [321h] y columna [322h], color en [323h]
-char:	mov  dl, [322h]   	; Columna
+numero:	mov  dl, [322h]   	; Columna
 	mov  dh, [321h]   	; Fila
 	mov  bh, 0h   
 	mov  ah, 02h 
