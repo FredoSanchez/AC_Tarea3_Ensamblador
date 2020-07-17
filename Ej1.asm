@@ -89,7 +89,7 @@ next:	mov	ax, 0000h
 	call	m_cur2
 
 	xor	si, si
-texto9:	mov	ah, 0Eh 	
+texto5:	mov	ah, 0Eh 	
 	mov	al, [400h+si]
 	add	al, 20h
 	cmp	al, 40h
@@ -106,7 +106,7 @@ valid3:	mov	bl, 1111b
 
 valid2:	inc	si
 	cmp	si, [360h]
-	jle	texto9
+	jle	texto5
 	call	kb
 	int	20h
 
@@ -172,13 +172,13 @@ set2:	mov	al, 20h
 error:	mov	ah,3d
 	call	m_cur
 	xor	di, di
-texto5:	mov	ah, 0Eh 	 
+texto6:	mov	ah, 0Eh 	 
 	mov	al, [err+di]
 	mov	bl, 0100b
 	int	10h
 	inc	di
 	cmp	di, len2
-	jl	texto5
+	jl	texto6
 	call	kb
 	int	20h
 
