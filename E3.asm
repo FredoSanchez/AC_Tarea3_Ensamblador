@@ -10,9 +10,9 @@ section .text
     mov 	si, 10d
     mov 	di, 70d 
 
-	MOV 	AX, 0
+	MOV 	ax, 0
 	INT 	33h
-	MOV 	AX, 1
+	MOV 	ax, 1
 	INT 	33h
 
 reset: 
@@ -28,13 +28,13 @@ hitbox:
         mov ax,03h
         int 33h
         and bx, 3h
-        CMP CX, 10d 
+        CMP cx, 10d 
         JGE s1
         jmp hitbox 
     s1: cmp dx, 70d ; 
         JGE s
         jmp hitbox 
-    s:  CMP CX, 85d 
+    s:  CMP cx, 85d 
         JLE s2
         jmp hitbox 
     s2: cmp dx, 145d
